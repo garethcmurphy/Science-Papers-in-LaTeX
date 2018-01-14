@@ -1,0 +1,868 @@
+
+
+%
+\documentclass[journal]{IEEEtran}
+
+\usepackage{hyperref}
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+   %\usepackage[pdftex]{graphicx}
+   \usepackage{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+ % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+   \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at: 
+% http://www.ctan.org/tex-archive/macros/latex/required/graphics/
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found as epslatex.ps or
+% epslatex.pdf at: http://www.ctan.org/tex-archive/info/
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.pdf) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.pdf .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage[cmex10]{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics. If using
+% it, be sure to load this package with the cmex10 option to ensure that
+% only type 1 fonts will utilized at all point sizes. Without this option,
+% it is possible that some math symbols, particularly those within
+% footnotes, will be rendered in bitmap form which will result in a
+% document that can not be IEEE Xplore compliant!
+%
+% Also, note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/amslatex/math/
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithms/
+% There is also a support site at:
+% http://algorithms.berlios.de/index.html
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithmicx/
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/tools/
+
+
+%\usepackage{mdwmath}
+%\usepackage{mdwtab}
+% Also highly recommended is Mark Wooding's extremely powerful MDW tools,
+% especially mdwmath.sty and mdwtab.sty which are used to format equations
+% and tables, respectively. The MDWtools set is already installed on most
+% LaTeX systems. The lastest version and documentation is available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/mdwtools/
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+%\usepackage{eqparbox}
+% Also of notable interest is Scott Pakin's eqparbox package for creating
+% (automatically sized) equal width boxes - aka "natural width parboxes".
+% Available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/eqparbox/
+
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\usepackage[tight,footnotesize]{subfigure}
+% subfigure.sty was written by Steven Douglas Cochran. This package makes it
+% easy to put subfigures in your figures. e.g., "Figure 1a and 1b". For IEEE
+% work, it is a good idea to load it with the tight package option to reduce
+% the amount of white space around the subfigures. subfigure.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at:
+% http://www.ctan.org/tex-archive/obsolete/macros/latex/contrib/subfigure/
+% subfigure.sty has been superceeded by subfig.sty.
+
+
+
+%\usepackage[caption=false]{caption}
+%\usepackage[font=footnotesize]{subfig}
+% subfig.sty, also written by Steven Douglas Cochran, is the modern
+% replacement for subfigure.sty. However, subfig.sty requires and
+% automatically loads Axel Sommerfeldt's caption.sty which will override
+% IEEEtran.cls handling of captions and this will result in nonIEEE style
+% figure/table captions. To prevent this problem, be sure and preload
+% caption.sty with its "caption=false" package option. This is will preserve
+% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later 
+% (recommended due to many improvements over 1.2) of subfig.sty supports
+% the caption=false option directly:
+%\usepackage[caption=false,font=footnotesize]{subfig}
+%
+% The latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/subfig/
+% The latest version and documentation of caption.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/caption/
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure. The latest version and documentation can be found at:
+% http://www.ctan.org/tex-archive/macros/latex/base/
+
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/sttools/
+% Documentation is contained in the stfloats.sty comments as well as in the
+% presfull.pdf file. Do not use the stfloats baselinefloat ability as IEEE
+% does not allow \baselineskip to stretch. Authors submitting work to the
+% IEEE should note that IEEE rarely uses double column equations and
+% that authors should try to avoid such use. Do not be tempted to use the
+% cuted.sty or midfloat.sty packages (also by Sigitas Tolusis) as IEEE does
+% not format its papers in such ways.
+
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/misc/
+% Read the url.sty source comments for usage information. Basically,
+% \url{my_url_here}.
+
+
+\usepackage{aas_macros}
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Multidimensional simulations of magnetic field amplification and electron acceleration to near-energy equipartition with ions by a mildly relativistic quasi-parallel plasma collision.}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+
+
+
+
+\author{Gareth~C.~Murphy,
+        Mark~E.~Dieckmann,        
+        and~Luke~{O'C.}~Drury% <-this % stops a space
+\thanks{Manuscript received December 1, 2009; revised July 12, 2010; accepted
+July 26, 2010. This work was supported in part by the Science Foundation
+Ireland under Grant 08/RFP/PHY1694 and in part by the Swedish
+Vetenskapsr\aa det.}
+\thanks{G. C. Murphy and L. {O'C}. Drury are with the Dublin Institute for Advanced
+Studies, Dublin 2, Ireland (e-mail: gmurphy@cp.dias.ie; ld@cp.dias.ie).}% <-this % stops a space
+\thanks{M. E. Dieckmann is with the Department of Science and Technology,
+Linkšping University, 60174 Norrk\"ping, Sweden (e-mail: Mark.E.
+Dieckmann@itn.liu.se).}% <-this % stops a space
+\thanks{Color versions of one or more of the figures in this paper are available online
+at http://ieeexplore.ieee.org.}% <-this % stops a space
+\thanks{Digital Object Identifier 10.1109/TPS.2010.2063442}% <-this % stops a space
+}
+
+
+
+
+% conference papers do not typically use \thanks and this command
+% is locked out in conference mode. If really needed, such as for
+% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+% after \documentclass
+
+% for over three affiliations, or if they all won't fit within the width
+% of the page, use this alternative format:
+% 
+%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
+%Homer Simpson\IEEEauthorrefmark{2},
+%James Kirk\IEEEauthorrefmark{3}, 
+%Montgomery Scott\IEEEauthorrefmark{3} and
+%Eldon Tyrell\IEEEauthorrefmark{4}}
+%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+%Georgia Institute of Technology,
+%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+%Email: homer@thesimpsons.com}
+%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+%Telephone: (800) 555--1212, Fax: (888) 555--1212}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+% make the title area
+\maketitle
+
+\begin{abstract}
+The energetic electromagnetic eruptions observed during the prompt phase 
+of gamma-ray bursts are attributed to synchrotron emissions. The internal 
+shocks moving through the ultrarelativistic jet, which is ejected by an 
+imploding supermassive star, are the likely source of this radiation.
+Synchrotron emissions at the observed strength require the simultaneous 
+presence of powerful magnetic fields and highly relativistic electrons. 
+We explore with one and three-dimensional relativistic particle-in-cell 
+simulations the transition layer of a shock, that evolves out of the 
+collision of two plasma clouds at a speed 0.9c and in the presence of a 
+quasi-parallel magnetic field. The cloud densities vary by a factor of 10. 
+The number densities of ions and electrons in each cloud, which have the 
+mass ratio 250, are equal. The peak Lorentz factor of the electrons is 
+determined in the 1D simulation, as well as the orientation and the strength 
+of the magnetic field at the boundary of the two colliding clouds. The 
+relativistic masses of the electrons and ions close to the shock transition 
+layer are comparable as in previous work. The 3D simulation shows  
+rapid and strong plasma filamentation behind the transient precursor. The magnetic field component orthogonal to the initial field direction 
+is amplified in both simulations to values that exceed those expected from 
+the shock compression by over an order of magnitude. The forming shock is 
+quasi-perpendicular due to this amplification. The simultaneous presence of 
+highly relativistic electrons and strong magnetic fields will give rise to 
+significant synchrotron emissions.
+\end{abstract}
+% IEEEtran.cls defaults to using nonbold math in the Abstract.
+% This preserves the distinction between vectors and scalars. However,
+% if the conference you are submitting to favors bold math in the abstract,
+% then you can use LaTeX's standard command \boldmath at the very start
+% of the abstract to achieve this. Many IEEE journals/conferences frown on
+% math in the abstract anyway.
+
+% no keywords
+
+\begin{IEEEkeywords}
+Plasma accelerators,
+Plasma simulation,
+Plasma transport processes,
+Magnetic confinement
+\end{IEEEkeywords}
+
+
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+% conference papers do not normally have an appendix
+
+Mildly relativistic plasma collisions are commonly found in astrophysical 
+scenarios, in particularly strong supernovae \cite{Koyama:1995ys,Kulkarni:1998lh,Enomoto:2002rt,Bamba:2003vn}, in 
+gamma ray bursts (GRBs) \cite{Piran:1999jt,Medvedev:1999sf,Lyutikov:2003fk,Fox:2006vs} and 
+
+in the jets 
+of microquasars \cite{Fender:1999fk,Kaiser:2000fj,Jamil:2010lr} and active galactic nuclei \cite{Rees:1978zr} \cite{Spada:2001mz} \cite{Sahayanathan:2005uq}. 
+
+
+The prompt emissions of the
+ultrarelativistic GRBs are probably the most spectacular eruptions of
+electromagnetic radiation in the universe, as they are observed across 
+cosmological distances. Since the first observations of GRBs thousands 
+have been detected. They all share a common signature of energetic 
+radiation attributed to highly relativistic electrons and strong magnetic 
+fields. 
+
+The details of the underlying physical mechanism which causes the prompt emissions is still unknown. 
+In particular, the method by which magnetic field is generated and sustained, and the means by which electrons are accelerated to ultrarelativistic speeds in sufficient numbers to be injected into the Fermi mechanism is still under debate.
+It is therefore interesting and relevant to use numerical simulations to probe the behaviour of magnetised shocks to see if a robust mechanism to amplify the field self-consistently may be found.
+
+
+While the first-order Fermi 
+acceleration mechanism is certainly capable of accelerating particles 
+\cite{Drury:1983sf} to ultrarelativistic energies, it requires a seed 
+population of non-thermal particles before it can viably accelerate them
+to high energies. This mechanism may also not be able to provide rapidly
+enough the huge quantities of highly relativistic electrons, which drive
+the prompt emissions of gamma ray bursts. Plasma instabilities driven
+by the relativistic flow may be a more likely candidate mechanism.
+
+
+
+\subsection{Plasma Instabilities}
+
+Many instabilities, such as the two-stream, filamentation or Weibel-type 
+and oblique instabilities are expected to operate in the relativistic 
+plasma, and it is not a straightforward task to distinguish the dominant 
+mode \cite{Bret:2009ec},\cite{Lemoine:2009kg}. The Weibel-type filamentation 
+instability is expected to generate or amplify magnetic fields. Since 
+the pioneering studies of the electromagnetic Weibel instability 
+\cite{Weibel:1959it,Morse:1971} and of the beam-Weibel or filamentation 
+instability \cite{Davidson:1972,Lee:1973,Molvig:1975} much work has been 
+done, both analytical \cite{Sagdeev:1979ph,Bret:2004dn,Bret:2005hl,Lazar:2009qq} 
+and numerical using kinetic particle-in-cell simulations 
+\cite{Honda:2000,Silva:2002qc,Stockem:2008hl} and Vlasov simulations 
+\cite{Califano:2002ci}.
+
+Reconnection in pair plasmas also excites the Weibel instability
+\cite{Zenitani:2008qy,Swisdak:2008fj}.
+
+Three-dimensional simulations have the best chance to approximate the correct 
+physics, however they are extremely challenging even for contemporary state of 
+the art supercomputers. It is thus customary to reduce the ion to electron mass 
+ratio, to consider only leptonic flows or to extract aspects of the physically 
+correct three-dimensional plasma behaviour and to model them in 1D or 2D grids 
+at the appropriate spatio-temporal resolution. Certain instabilities can be 
+examined in such reduced geometries like the electrostatic two-stream instability 
+in one dimension and the filamentation instability in two dimensions.
+
+\subsection{Previous related work on plasma collisions and shock formation}
+Early work was done with counterstreaming and interpenetrating electron-positron 
+plasmas, finding filamentation growing\cite{Silva:2002qc}\cite{Silva:2003rw}. 
+Previous simulation studies of relativistic shocks in more than one spatial 
+dimensions have focussed on mildly to highly relativistic collision speeds and
+on symmetric clouds of positron-electron pair plasmas\cite{Kazimura:1998}
+\cite{Spitkovsky:2005hi}\cite{Sironi:2009kt}\cite{Nishikawa:2009}. These simulations 
+are fast, because they only involve one spatiotemporal scale, namely the leptonic 
+one. However these scenarios necessarily exclude the wealth of wave modes and nonlinear
+processes which exist in ion-electron collisions, due to the mass asymmetry and the 
+massive kinetic energy of the ions. Relevant PIC simulations are the 3D simulation 
+with a low mass ratio discussed in Ref. \cite{Frederiksen:2004rm} and the 2D simulation 
+with a high mass ratio performed in Ref. \cite{Spitkovsky:2008Ion}. Magnetic field 
+effects on the collision of two plasma clouds have been investigated too 
+\cite{Hededal:2005zl}.
+
+In this paper we consider the simultaneous effects of a high plasma temperature, a
+quasi-parallel magnetic field and an initial density asymmetry on the plasma collision. 
+A density asymmetry has been introduced before \cite{Frederiksen:2004rm}, but here we 
+increase the density ratio from 3 to 10. This high ratio implies, that the initial 
+spectrum of unstable waves should shift from the electromagnetic filamentation 
+instability to the partially electrostatic oblique mode instability \cite{BreGrem:2007}. 
+This shift is further emphasized by the high temperature and the guiding magnetic field, 
+which both reduce the growth rate of the filamentation instability compared to those of 
+the other waves. Section 1 provides a more detailed overview over the simulation code
+and the initial conditions. One-dimensional PIC simulations with a similar setup have 
+been considered first by Ref. \cite{Bessho:1999sf}. They have been extended to two 
+dimensions, albeit over a limited spatio-temporal range, by Ref. \cite{Dieckmann:2008dp}. 
+The 1D PIC simulation data we present here in Section 2 employs a setup that is 
+practically identical to that in Ref. \cite{Dieckmann:2008dp} apart from the different ion 
+to electron mass ratio and code. The simulation results are essentially the same, which 
+is clear evidence for the actual physical equipartition of the electron and ion energy 
+in the resulting shock. Obtaining this result only for one mass ratio may be a 
+coincidence. The 3D numerical simulation also presented in Section 2 extends the 2D 
+simulation in Ref. \cite{Dieckmann:2008dp}, confirming that the front of the dense cloud 
+is practically planar. The 1D PIC simulation is thus at least initially a good 
+approximation for the plasma dynamics close to the front of the expanding dense cloud. 
+However, the plasma density distribution clearly evidences a filamentation behind this 
+front, which is not revealed to this extent by the electromagnetic fields in Ref.
+\cite{Dieckmann:2008dp}.
+
+\section{Initial conditions and numerical Method}
+
+Two plasma clouds collide in the simulation box. The species 1 and 2 are the electrons 
+and ions of the dense cloud, while the electrons and ions of the tenuous cloud are the 
+species 3 and 4. The species number gives the subscript $j$ of the density $n_j$. Each 
+cloud has electrons and ions with the mass ratio $R=m_i / m_e = 250$, with the same 
+density ($n_1 = n_2$ and $n_3=n_4$), temperature and mean speed. Each cloud is thus 
+initially charge- and current neutral. The mean velocity vectors of both clouds point 
+along opposite $x$-directions and they have the same modulus $v_b$. Each cloud occupies 
+initially one half of the simulation box and their contact boundary is located at $x=0$ 
+at the time $t=0$. Both clouds are uniform along the $y,z$ directions. No particles 
+are introduced at the boundaries for $t>0$. The clouds thus detach instantly from the 
+walls and we can use periodic boundary conditions in all directions. A guiding magnetic 
+field $\mathbf{B}_0$ gives an electron gyrofrequency $\omega_c = e|\mathbf{B}_0| / m_e$ that 
+equals the electron plasma frequency $\omega_{p1} = {(e^2 n_1 / m_e \epsilon_0)}^{1/2}$ of 
+the dense cloud. The $\mathbf{B}_0$ is quasi-parallel to the flow (x) direction and at 
+$t=0$ the $B_{0,x} \gg B_{0,z}$ and $B_{0,y}=0$. The convection electric field $E_c = 
+|v_b B_{0,z}|$ changes its sign across the collision boundary. The collision speed $2v_b / 
+(1+v_b^2) = 0.9c$ and the electron thermal velocity $v_t = {(T_e / m_e)}^{1/2}$ for $T_e =$ 
+131 keV is $\approx$ c/2. We express space and time in the relevant units of the dense ions 
+(species 2), which are the ion skin depth $\lambda_2 = c / \omega_{p2}$ with 
+$\omega^2_{p1}/\omega^2_{p2}=R$ and the inverse ion plasma frequency $\omega_{p2}^{-1}$. 
+
+
+
+
+We use the particle-in-cell method described in detail in Ref. \cite{Dawson:1983dz}.
+The normalised equations are
+\begin{equation}
+\nabla  \times \mathbf{E} =  -\frac{\partial \mathbf{B}} {\partial t},
+\end{equation}
+\begin{equation}
+\nabla  \times \mathbf{B} =  \frac{ \partial \mathbf{E}} {\partial t} + \mathbf{J},
+\end{equation}
+\begin{equation}
+\nabla  \cdot \mathbf{B} =  0,
+\end{equation}
+\begin{equation}
+\nabla  \cdot \mathbf{E} =  \rho,
+\end{equation}
+\begin{equation}
+\frac{ d \mathbf{p}_j}{d t} = q_i \left( \mathbf{E} + \mathbf{v}_j \times \mathbf{B}
+\right),
+\end{equation}
+\begin{equation}
+\mathbf{p}_j=m_k \Gamma_j \mathbf{v}_j,
+\end{equation}
+\begin{equation}
+\frac{ d \mathbf{x}_j}{d t} =\mathbf{v}_j,
+\end{equation}
+
+The particle $j$ of species $k$ has the mass $m_k$.
+The quantities in SI units (subscript $p$) can be obtained by the substitutions 
+$\mathbf{E}_p = \omega_{p2} c m_i \mathbf{E} / e$, $\mathbf{B}_p = \omega_{p2} m_i 
+\mathbf{B} / e$, $\rho_p = e n_2 \rho$, $\mathbf{J}_p = e c n_2 \mathbf{J}$, 
+$\mathbf{x}_p = \lambda_2 \mathbf{x}$ and $t_p = t / \omega_{p2}$.
+
+The simulation resolution is as follows. For the 1D simulation we use 18,000 cells 
+along $x$ and 250 particles per cell. For the 3D simulation we can only simulate a 
+small fraction of the 1D domain with regard to $x$, but we get instead a view of 
+the early 3D filament formation. We use 20 particles per cell and a 3D box composed 
+of 1500x100x100 cells, which spans a total of $15\lambda_2 \times 1.25\lambda_2 \times 
+1.25\lambda_2$ and a long direction aligned with $x$. 
+The timesteps for the 1D and 3d simulations are both $8.6e2 \omega^{-1}_{p1}$
+The physical and simulation 
+parameters are summarized in Tables \ref{t1} and \ref{t2}.
+
+\begin{table}[!t] 
+\renewcommand{\arraystretch}{1.3} 
+\caption{Physical Parameters} 
+\label{t1} 
+\centering 
+\begin{tabular}{c||c} 
+\hline 
+\bfseries Parameter & \bfseries Value\\ 
+\hline\hline 
+Thermal Velocity & $0.52c$\\ 
+Collision Speed & $0.9c$\\ 
+Beam Speed & $0.63c$ \\
+Temperature & 131 keV \\
+Mass ratio & 250 \\
+Field Angle &  0.1 radians\\
+Density Ratio & 10 \\
+\hline 
+\end{tabular} 
+\end{table} 
+
+\begin{table}[!t] 
+\renewcommand{\arraystretch}{1.3} 
+\caption{Numerical Parameters} 
+\label{t2} 
+\centering 
+\begin{tabular}{c||lc} 
+\hline 
+\bfseries Parameter & \bfseries 1D & \bfseries 3D \\ 
+\hline\hline 
+No. particles/cell & 250 & 20  \\ 
+No. Cells& 18000 & $1500x100x100$ \\ 
+Timestep &  8.6e-2 $\omega^{-1}_{p1}$ & 8.6e-2 $\omega^{-1}_{p1}$ \\
+\hline 
+\end{tabular} 
+\end{table} 
+
+\section{Results}
+
+\subsection{One-dimensional simulation}
+
+\begin{figure*}[t]
+\begin{center}
+   \begin{minipage}[t]{.48\linewidth}
+\includegraphics[width=.99\linewidth]{xg16000.pdf}
+   \end{minipage} \hfill
+   \begin{minipage}[t]{.48\linewidth}
+\includegraphics[width=.99\linewidth]{xpx16000.pdf}
+   \end{minipage} \hfill
+\hfill
+\caption{Left Panel: Electron phase space density $f_e(\Gamma,x)$. Right Panel: Ion phase space density $f_i (\Gamma v_x/c,x)$. The colour scale is 10-logarithmic and the density is expressed in units of a computational particle of the tenuous cloud.}
+\label{f1}
+\end{center}
+\end{figure*}
+
+\begin{figure}[pb]
+\centerline{\includegraphics[width=.99\linewidth]{field1d.pdf}}
+\vspace*{8pt}
+\caption{The Energetic Electromagnetic Structure in 1D: Plots of electric and magnetic field strengths. The upper panel shows the components of $\mathbf{E}$ and the lower those of $\mathbf{B}$. }
+\label{f1a}
+\end{figure}
+
+
+
+A circularly polarized electromagnetic wave grows practically instantly at the contact boundary
+of both clouds and in both simulations. This collision boundary evolves due to the plasma
+counterstream into a cloud overlap layer. The magnetic field is frozen-in into each cloud outside
+the overlap layer. Inside this layer, the magnetic field continues to be practically at rest in
+the reference frame of the dense plasma cloud. The tenuous cloud moves at a mildly relativistic 
+speed relative to this reference frame and the particles are deflected by $\mathbf{B}_0$. The 
+ions and electrons react differently to $\mathbf{B}_0$ and, due to its obliqueness, the particles 
+are forced onto an orbit that involves all components of $\mathbf{p}$. This corkscrew orbit is 
+discussed in more detail elsewhere \cite{Dieckmann:2008dp}. The resulting net current amplifies the 
+magnetic field perturbation and a circularly polarized localized wave structure forms. 
+  
+Figure \ref{f1} displays the most relevant phase space distributions. These are the electron
+distribution $f_e (\Gamma,x)$ and the ion distribution $f_i (x,p_x)$. The electron distribution
+reveals the peak energies reached by the electrons, while the ion distribution can reveal the
+formation of a shock. This is achieved, when the ion distributions of both clouds mix in this
+phase space projection. The 1D simulation stops at the time $t=84$, just before the shock 
+formation. The electron distribution demonstrates that the electrons of the tenuous cloud
+(species 3) are forced onto a strong oscillation, which resembles a corkscrew orbit by the
+rotation in the $p_y,p_z$-plane. They reach a peak $\Gamma \approx 50$ at $x\approx 43$. The 
+electrons of the dense cloud (species 1), on the other hand, are not yet accelerated on this 
+scale. The electrons of both clouds show a two-stream configuration in the interval $30<x<43$. 
+The electrons would drive the oblique mode instability, which is here suppressed by the 1D geometry. 
+Only the electrostatic two-stream instability can develop here and it results in the thermalization 
+of the electrons of the tenuous cloud. This thermalization results in the hot electron population 
+with $x<30$ and with $\Gamma \le 25$. The phase speed of the two-stream waves is close to the beam 
+speed of the tenuous beam and only those interact resonantly with this wave. The electron phase 
+space distribution of the dense cloud thus remains practically unchanged. The ion phase space 
+distribution reveals that a shock is about to form at $x\approx 40$. The circularly polarized 
+energetic electromagnetic structure (EES) is here strong enough to force the ions onto a corkscrew 
+orbit. In particular the ions of the tenuous cloud (species 4) are perturbed within the cloud 
+overlap layer. The beam striation in the $x,p_x$ plane implies, that the associated fields must 
+be at least partially electrostatic. Electrostatic fields and such phase space striation are 
+reminiscent of the Buneman instability, which would develop here between the ions of the tenuous 
+cloud and the electrons of the dense one \cite{Buneman:1958}.
+
+Figure \ref{f1a} displays the distributions of all components of $\mathbf{B}$ and 
+$\mathbf{E}$ near the front of the dense cloud at the time $t=84$, which corresponds to 
+the particle distribution in Fig. \ref{f1}. The upper panel shows that all components of 
+$\mathbf{E}$ have reached a comparable strength. The electromagnetic $E_y$ and $E_z$ are 
+phase-shifted by $90^\circ$. The magnetic $B_y,B_z$ components (lower panel) also show 
+this phase shift. We find that $B_x = B_{x,0}$. The $B_x$ must remain constant in a 1D simulation 
+by $\nabla \cdot \mathbf{B} = 0$ and a change of $B_x$ in time could only be driven by $\partial_y 
+E_z - \partial_z E_y \neq 0$, which is not possible in 1D. The asymmetry in space of the EES 
+relative to its amplitude maximum may reflect the varying plasma skin depth across the collision 
+boundary. The skin depth is reduced by a factor $\sqrt{10}$ in the dense plasma. If the penetration 
+depth of the EES is a few ion skin depths, then the wave envelope must decrease more quickly as 
+it enters the dense plasma.
+
+The electrostatic component, $E_x$ is strong in the interval where the electromagnetic fields ($E_y$ and $E_z$) are strong. 
+The electromagnetic fields are tied to the circularly polarized wave structure, which provides 
+the dissipation of the flow energy. The $E_x$ is such, that electrons are accelerated to the 
+left within $42 < x < 47$. This electric field must develop between the ions and the electrons 
+of the tenuous cloud, because the dense cloud in Fig. \ref{f1} has not propagated yet that far. 
+The likely cause is the deflection of the electrons of species 3 by the EES. A mere rotation of 
+the electron velocity vector away from the $x$ direction, would decrease their flow velocity 
+along $x$. The ion speed remains practically unaffected and an electric charge builds up. The
+ charge results in an electrostatic field, which drags the electrons with the ions. The 
+electrons are accelerated at the expense of the ion kinetic energy. This explains the decrease 
+of the flow speed modulus of the ions of the tenuous cloud and the electron acceleration in 
+this interval. 
+
+The EES at the front of the dense cloud has a wavevector parallel to $x$ and it can thus be 
+resolved by the 1D simulation. The electromagnetic instabilities in the cloud overlap layer, 
+e.g. the filamentation- and the oblique mode instability, cannot develop here, because their 
+wavevectors are orthogonal or oblique to the beam velocity vector. The plasma dynamics in the 
+cloud overlap layer can thus not be accurately resolved by the 1D simulation, which overemphasizes 
+the importance of the electrostatic two-stream and Buneman instabilities with their flow-aligned
+wavevectors. We turn to the 3D simulation, with which we can resolve the full wave spectrum
+during the first few inverse ion plasma frequencies.
+
+\subsection{Three-dimensional plasma filament structure}
+
+
+
+\begin{figure}[pb]
+\centerline{\includegraphics[width=.99\linewidth]{jpsi00060002.pdf}}
+\vspace*{8pt}
+\caption{Three-dimensional rendering of a simulation of plasma collision. Two isosurfaces of logarithm of ion density are shown at values of 2.5 and 1.9. The filaments are preferentially aligned along the x axis, gyrating in the y z plane.    }
+\label{f2}
+\end{figure}
+
+\begin{figure*}[t]
+\begin{center}
+   \begin{minipage}[t]{.48\linewidth}
+\includegraphics[width=.99\linewidth]{xpx00600.pdf}
+   \end{minipage} \hfill
+   \begin{minipage}[t]{.48\linewidth}
+\includegraphics[width=.99\linewidth]{xpx01200.pdf}
+   \end{minipage} \hfill
+\hfill
+\caption{Growth and merging of filaments in 3D: Ion density plots at time $t=3$ and $t=6$. 
+Filaments, which are characterized through density modulations, have increased in size.}
+\label{f3}
+\end{center}
+\end{figure*}
+
+\begin{figure}[pb]
+\centerline{\includegraphics[width=.99\linewidth]{eescut.pdf}}
+\vspace*{8pt}
+\caption{Electromagnetic energy densities at $t=3$. The left panels show the energy densities
+$B_x^2$ and $E_x^2$ along the initial flow velocity vector, while the right panels show
+$B_{perp}^2 = B_y^2 + B_z^2$ and $E_{perp}^2 = E_y^2 + E_z^2$ orthogonal to the initial flow 
+direction.}\label{f4}
+\end{figure}
+
+The 3D simulation is initialised in the same manner as the 1D simulation, except over a smaller 
+domain along $x$, due to computational contraints. Consequently the simulation is run over the 
+significantly shorter time interval $t=6$ than the 1D simulation with its $t=84$. This time is 
+also somewhat shorter than the runtime of the 2D PIC simulation in Ref. \cite{Dieckmann:2008dp}, 
+which ran for about 11 inverse ion plasma frequencies for the mass ratio 400. This previous work 
+examined the electromagnetic wave structures in particular at the front of the dense cloud and 
+the simulation's end, showing that they have remained planar. Here we do not look at the field 
+topology but at the ion density distribution in the entire simulation box. 
+  
+Figure \ref{f2} shows a 3d rendering of the ion density in our numerical simulation. Clearly 
+the counterstreaming ions in three dimensions quickly form filaments, which result in an 
+amplification of the magnetic field orthogonal to the filament axis. These magnetic fields
+grow until they saturate through magnetic trapping \cite{Davidson:1972}. The strength $B_0$ 
+of the guiding magnetic field has been selected so as to suppress the filamentation 
+instability and the oblique mode instability driven by the electrons \cite{Bret:2006rc} in 
+a spatially uniform two-beam configuration. The magnetic field strength has apparently 
+been insufficient to suppress the filamentation and mixed mode instabilities in the presence 
+of ions and of a spatial nonuniformity. A further increase of the amplitude of $B_0$ would 
+be necessary to achieve this \cite{Hededal:2005zl}, but such a field is probably unrealistic 
+for most astrophysical plasmas. The filaments have a preferential alignment with the initial 
+flow velocity vector. This is not surprising, because the filamentation and oblique mode 
+instabilities yield the growth of a magnetic field through the redistribution of the 
+microcurrents carried by the moving charged particles. These microcurrents $\propto q \mathbf{v}$ 
+are obviously strongest along the mean flow (x) direction. 
+
+This preferential alignment of the filaments with the x-direction allows us to obtain insight 
+into the filament thickness with slices in the y,z plane. Their coherence length along the 
+filament axis can be estimated from two-dimensional cross-sections in the x,y plane. In Figure 
+\ref{f3} we plot these two dimensional cuts from the 3d simulation at the times $t=3$ and $t=6$. 
+We clearly see the formation of filaments in the ion density distribution, which we identify 
+through a density modulation. Their characteristic diameter is well below 0.1 ion inertial 
+lengths at $t=3$ and is thus comparable to the electron skin depth of the dense cloud $\lambda_1 
+= \lambda_2 / \sqrt{R}$. The filament diameter increases beyond 0.1 ion inertial lengths through 
+the dynamical interaction and the mergers of filaments \cite{Bogdan:1985}. This small size 
+suggests that until $t=6$ the main driver of the ion beam filamentation has been the electrons. 
+The cut of the ion distribution in the y,z plane in the right panel of Fig. \ref{f3} shows some 
+filaments with a significant density depletion and with a radial cross-section. Examples are the 
+low-density structures at $z \approx 1.0$ and $0.9 < y < 1.2$. These are ion filaments immersed 
+in an almost spatially uniform ion background. The ion density is reduced and the small spatial 
+scale suggests that the ions merely follow the electron density, in order to maintain the
+quasi-neutrality of the plasma. The electron density can be decreased through a magnetic expulsion 
+of the electrons of one of the clouds. The coherence length in the x,y plane is about an ion skin 
+depth, which is an order of magnitude larger than the filament diameter. Some of these filaments 
+may thus be described well by their cross section in the y,z plane, which neglects changes along 
+$x$. We furthermore find that the spatial separation of these radial filaments is larger than 
+their diameter, which implies that these filaments may not interact magnetically over a limited 
+time interval. An equilibrium might be possible during this time between the filament and the 
+spatially uniform background plasma. This equilibrium may be similar to the Hammer-Rostoker 
+equilibrium for a tenuous relativistic electron beam that crosses a dense electron background 
+\cite{Hammer:1970}. The agreement is not exact. Here the ions react to the electric charge built 
+up by the expulsion of the background electrons from the flux tube and the plasma carries an 
+oblique magnetic field. Both aspects have not been considered by Ref. \cite{Hammer:1970}. 
+ 
+Finally we notice from the right panel in Fig. \ref{f3} that the filamentation also involves
+the front of the dense cloud at $x\approx 4$. This filamentation is fairly weak and its scale
+is again a fraction of the ion skin depth. This implies that a 1D simulation can not reproduce
+the exact physics at the cloud front but, at least until $t=6$, this approximation is fairly
+accurate. It is interesting that a filamentation was not observed in the 2D simulation in
+Ref. \cite{Dieckmann:2008dp} that covered a longer time interval. Several reasons are possible. 
+Firstly, the higher ion mass in the 2D simulation may have delayed the ion filamentation in
+the y,z plane with respect to the formation of the EES, which modulates the ions along $x$. Both 
+are competing processes. Secondly, the field distribution was used in Ref. \cite{Dieckmann:2008dp} 
+to determine the planarity of the cloud front, while the ion density is considered here. The
+magnetic field amplification by the filamentation instability is much weaker than that by
+the EES and it may not be visible. The ion density modulation along y,z can thus more accurately
+reveal the filamentation than the electromagnetic fields. The electromagnetic fields due to the
+EES reach a much higher energy density than those due to the filamentation instability also in
+the 3D simulation, which we show now.
+ 
+
+
+\subsection{The  Energetic Electromagnetic Structure (EES) in 3D}
+
+The EES acts to accelerate charged particles, it can provide the energy dissipation that 
+enforces the formation of a shock and it may provide a compact location for synchrotron 
+radiation in the shock transition layer. The size scale and the energy density is similar 
+to that detected in the Short Large Amplitude Magnetised Structures (SLAMS), which have 
+been observed both in simulations and in those regions of the Earth's bow shock, where the 
+ambient magnetic field is quasi-parallel to the shock normal \cite{Dieckmann:2008dp}\cite{Mann:1994}\cite{Behlke:2003}
+\cite{Lembege:2004}\cite{Dieckmann:2010qf}. 
+
+In Figure \ref{f4}, we see for the first time in 3d dimensions the EES. We make use of the 
+quasi-planarity of the front of the dense cloud at $t=3$ in Fig. \ref{f3} and we integrate
+the energy densities of the electromagnetic fields along y and z, which reduces the noise 
+levels. The energy densities subdivide naturally into (1) $B_x^2$, which is unchanged in a 
+1D simulation, into (2) $B_{perp}^2 = B_y^2+B_z^2$ and (3) $E_{perp}^2 = E_y^2 + E_z^2$, which 
+would be purely electromagnetic in a 1D simulation and into (4) $E_x^2$, which would be 
+electrostatic. This distinction is strictly possible only in 1D, because the derivatives 
+along y and z vanish in the Maxwell's equations. We expect that initially and due to the 
+planarity of the wave structures this holds also in 3D. All energy densities are normalized 
+to the same value, which is the energy density of $\mathbf{B}_0$. 
+
+Already at this early simulation time all energy densites surpass by far the initial magnetic
+energy density as the front of the dense plasma cloud is crossed from the upstream into the
+cloud overlap layer. The dominant component is $B_{perp}$, as in the 1D simulation. It peaks
+at $x\approx 2.6$, which is ahead of the dense cloud. The peak of $E_{perp}$ coincides with
+this location and both thus belong to the same wave structure. Note that, even if the EES 
+were purely magnetic in its rest frame, the convective electric field would be significant
+due to its rapid propagation. The three-dimensional simulation facilitates the growth of
+$B_x^2$ and its peak energy density, which is an order of magnitude less than that of 
+$B_{perp}^2$, is reached at the same position $x=2.6$ as that of $B_{perp}^2$. The $E_x^2$
+in the 3D simulation shows like that of $B_x^2$ a distribution, which differs strongly from 
+its equivalent in the 1D simulation. It grows steadily as we go from $x=3$ to $x=0.5$. The
+electric field in the 1D simulation peaked where the EES was strongest. We interpret the
+changed distribution $E_x^2$ in the following way. Let us assume, that the $E_x$ is driven 
+in 1D entirely by the different deflection of the electrons and the ions of the tenuous cloud. 
+The quasi-neutrality of the plasma of the tenuous cloud can then only be maintained by a 
+flow along x, while a 3D simulation enables also a flow of charges along y and z. This
+will, in turn, alter the electric field distribution. The apparent consequence is that the
+$E_x^2$ disappears within the EES. We may attribute instead the increase of $E_x^2$ in the
+3D simulation to the particle heating. The energy density of the electrostatic fluctuations 
+is proportional to the plasma temperature, if the plasma is in an equilibrium (See 
+\cite{Dieckmann:2004} and references therein). Evidence for this connection is that $E_{perp}^2 
+\approx 2E_x^2$ and the energy density per degree of freedom is thus similar. Since the 
+electrostatic energy density in a thermal equilibrium is also proportional to the particle
+mass, it is exaggerated by the low statistical plasma representation by a PIC code. The
+energy density of the EES is, on the other hand, independent of the mass of a computational
+particle and determined by the kinetic energy density of the inflowing plasma. We may expect 
+that in reality the electromagnetic energy would far exceed the electrostatic one.
+
+
+
+
+
+\section{Conclusions}
+In this paper we presents the results of long term 1D and short-term 3D simulations of plasma collisions.
+We found that in 1D a strong amplification of the field is found in the foreshock, in excess of that expected from compression alone. 
+Strong circularly polarised electromagnetic waves are generated at the collision boundary.
+We find that electron are accelerated to ultrarelativistic speeds and that the presence of the EES is confirmed in 3D
+The quasi-parallel magnetic field fails to suppress the filamentation in three dimensions, which was not detected in 2D fields in previous work, probably obscured in the data due to the large contrast provided by the EES. Ion densities are found to be a much better indicator for current filaments.
+The three dimensional structure of the EES differs from its one-dimensional model, in particular the parallel electric field is diminished at the collision boundary, and is only excited by electron heating.
+Filaments are produced with a characteristic width of approximately 0.1 ion inertial lengths and a larger separation between filaments, indicating a possibility for a magnetised Hammer-Rostoker equilibrium. 
+The presence and size of the EES could be critical for the acceleration of matter to high energies in plasma shocks.
+The simulations show the relevance of three dimensional simulations, even over small physical scales. 
+
+ The EES is relevant to the problem of the large fields and electron acclerations needed to explain the observations of spectra of Gamma Ray Bursts.
+The study shows that the EES is stable in 3d and that the magnetic field is amplified in 3D.
+Comparing other magnetic field amplification mechanisms such as Bell's instability 
+\cite{Bell:2004eu}, this mechanism does not require addition of external current, but produces electron accleration to near equipartition speeds and a strongly amplified field self-consistently.
+Shock compression can also amplify the field but only up to a factor $f$, $4<f<7$ depending on the value of the ratio of specific heats.
+In this respect it is an important result.	
+
+For future work, we need significantly longer timescales to confirm long-term stability of Energetic Electromagnetic Structure.
+Two-dimensional simulations are already under way with the goal of estimating the long term evolution of the system at high resolution.
+
+
+% use section* for acknowledgement
+\section*{Acknowledgment}
+
+
+
+The project is supported by Science Foundation Ireland grant number 08/RFP/PHY1694 and by the Swedish Vetenskapsr\aa det. The authors wish to acknowledge the SFI/HEA Irish Centre for High-End Computing (ICHEC) for the provision of computational facilities and support. The Plasma Simulation Code (PSC) was developed by Hartmut Ruhl at the University Ruhr, Bochum.
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+%\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+% \input[aas_macros.tex]
+\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+\bibliography{IEEEabrv,MyBibDeskLibrary}
+\end{document}
+
+

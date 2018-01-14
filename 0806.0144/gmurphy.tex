@@ -1,0 +1,474 @@
+%\documentclass[draft]{ws-procs11x85}
+\documentclass[square]{ws-procs11x85}
+%\documentclass{ws-procs11x85}
+\usepackage{multicol,float} %necessary when used with multicols
+
+\def\apj{ApJ}
+\def\jgr{J.~Geophys.~Res.}
+
+
+
+\begin{document}
+
+\title{3-d resistive MHD simulations of magnetic reconnection and the tearing mode instability in current sheets}
+
+\author{G. C. Murphy$^*$}
+
+\address{Laboratoire d'Astrophysique de Grenoble, CNRS, Universit\'e Joseph Fourier, Grenoble, France\\
+$^*$E-mail: Gareth.Murphy@obs.ujf-grenoble.fr}
+
+\author{R. Ouyed}
+
+\address{ Department of Physics and Astronomy, University of Calgary,AB, Canada\\
+E-mail: ouyed@phas.ucalgary.ca}
+
+\author{G. Pelletier}
+
+\address{Laboratoire d'Astrophysique de Grenoble, CNRS, Universit\'e Joseph Fourier, Grenoble, France\\
+E-mail: Guy.Pelletier@obs.ujf-grenoble.fr}
+
+\begin{abstract}
+Magnetic reconnection plays a critical role in many astrophysical processes
+where high energy emission is observed, e.g. particle
+acceleration, relativistic accretion powered outflows, pulsar winds and probably
+in dissipation of Poynting flux in GRBs. The magnetic field
+acts as a reservoir of energy and can dissipate its energy to thermal and
+kinetic energy via the tearing mode instability. We have performed 3d
+nonlinear
+MHD simulations of the tearing mode instability in a current sheet. Results from
+a temporal stability analysis in both the linear
+regime and weakly nonlinear
+(Rutherford) regime are compared to the numerical simulations. We observe
+magnetic island formation, island
+merging and oscillation once the instability has saturated. The growth in the
+linear regime is exponential in agreement with linear theory. In
+the second, Rutherford regime the island width grows linearly with time. We find
+that thermal energy produced in the current sheet strongly
+dominates the kinetic energy. Finally preliminary analysis indicates a P(k) ~
+4.8
+power law for the power spectral density which suggests that
+the tearing mode vortices play a role in setting up an energy cascade.
+\end{abstract}
+
+\keywords{MHD-Plasma physics-numerical simulations}
+
+\bodymatter
+
+\begin{multicols}{2}
+\section{Introduction}
+ Magnetic reconnection plays a critical role in many astrophysical processes, e.g. particle acceleration \cite{Phan}, accretion disks \cite{Hawley} and solar flares \cite{Shibata}. 
+It is also important in laboratory fusion devices such as tokamaks.  
+Magnetic reconnection is a topological change in the field which violates the frozen-flux condition of ideal magnetohydrodynamics (MHD). 
+If a magnetic field can leak across the plasma it can reach a lower energy state - in the case of a current sheet it can undergo ``tearing'' into filaments or magnetic islands.  
+A current layer of thickness $a$ may dissipate on timescales shorter than the resistive timescale $a^2/\eta$ due to the tearing mode instability (hereafter TMI).  
+The TMI was first discovered in tokamaks and stellerators and has been extensively studied since the pioneering works \cite{Furth} and \cite{Rutherford} (see also \cite{White}, \cite{PriestForbes}, \cite{Biskamp}). In this paper we present numerical simulations of the dissipation of current sheets and the formation of magnetic islands due to the tearing mode instability.  In Section \ref{Analysis} we remind the reader of the predictions of the linear and weakly nonlinear analyses of Furth et al. \cite{Furth} and Rutherford \cite{Rutherford}.  In Section \ref{Method} we present our numerical method. In Section \ref{Results} we compare the results with linear and weakly nonlinear theory.  In Section \ref{Turbulence} we present power spectra derived from 3d simulations.  In Section \ref{Discussion} we discuss the pitfalls of simulations where reconnection is not properly tracked and the implications for reconnection-driven turbulence.
+
+\section{Theory}
+\label{Analysis}
+
+
+\subsection{The linear regime}
+
+In the linear analysis it is assumed that resistivity is only important within
+the current layer.
+Separate solutions may then be derived for the exterior, ideal MHD region and
+the
+interior, resistive region.
+Using asymptotic matching \cite{Furth} derived stability range and
+growth rates for the TMI in the
+inviscid linear regime, neglecting the effects of compressibility.
+The range of the instability is $\alpha < 1, \alpha=ak $, where k is the wave
+number and $a$ is the current sheet width.
+
+The growth rate is:
+\begin{equation}
+\gamma \sim \alpha^{-\frac{2}{5}} S^{ \frac{2}{5}} / \tau_R
+\end{equation}
+
+The linear growth rate is a function of the mode number, $k$, the current sheet
+width, $a$, and the Lundquist or magnetic Reynolds number, $S$.
+The equations are valid for $\alpha > S^{-\frac{1}{4}}$.
+The system stays linear for as long as the magnetic island does not exceed the
+width of the current sheet.
+
+
+
+\subsection{Non-linear regime}
+Rutherford \cite{Rutherford} studied the evolution of the TMI in the weakly
+nonlinear
+regime, by considering the effect of second order eddy currents on the current
+sheet.
+\cite{Rutherford} found in the nonlinear regime that the island width grows as t,
+instability growth rate slows down from exponential to $t^2$, and that the
+critical amplitude where the linear
+solution ceases to be valid is:
+\begin{equation}
+B_{max}=\frac{\sqrt{2\eta\rho\gamma}}{\alpha}
+\end{equation}
+
+
+\begin{table}[H] % always [H] in multicols
+\tbl{ Growth Rates and Saturation Times for Lundquist number 2400}
+{\begin{tabular}{@{}lcccr@{}}\toprule
+ $\alpha$ &\multicolumn{2}{l} {Linear Growth Rate [$\tau_A^{-1}$]
+ }&\multicolumn{2}{l}{Saturation [$\tau_A$] }\\\colrule
+ & Theory & Sim & Theory & Sim \\ 
+ 0.01 & 0.0590 &  0.0528 & 153.233 & 170 \\ 
+ 0.04 & 0.0339 &  0.0484 & 394.980 & 250 \\
+ 0.3 & 0.0151 &  0.01276 & 508.370 & 520 \\\botrule
+\end{tabular}}\label{aba:tbl1}
+\end{table}
+\subsection{Previous work}
+
+More recent work has concentrated on including the physics of the Hall effect
+using multifluid or Hall MHD and electron inertia, using PIC techniques.
+Significant increase in reconnection rates is found in these studies \cite{Birn}. However in these works the authors do not compare against analytical theory nor is the 3D power spectrum calculated.
+
+\section{Numerical setup}
+\label{Method}
+
+We perform first 2D and then 3D simulations in resistive MHD using the
+astrophysical code PLUTO.
+% 
+% 
+% \begin{equation}
+% \frac{\partial \rho}{\partial t}+\nabla\cdot(\rho \mathbf u)=0
+% \end{equation}
+% 
+% \begin{equation}
+% \frac{\partial}{\partial t}\left(
+% \rho \mathbf u
+% \right)
+% +\nabla \cdot \left[
+% \rho \mathbf u \otimes \mathbf u
+% +\left(
+% p^*
+% \right)
+% \mathbf {{\overline {\overline I}}}
+% +\mathbf{B} \otimes \mathbf{B}
+% \right]
+% =0
+% \end{equation}
+% 
+% 
+% \begin{equation}
+% \frac{\partial \mathbf{B} }{\partial t}+
+% \nabla \times (
+% \mathbf{B} \times \mathbf{u}
+% + \eta \mathbf{J}
+% )
+% = 0 
+% \end{equation}
+% 
+% \begin{equation}
+% \frac{\partial E}{\partial t}
+% +\nabla \cdot \left[ \left( E + p^*\right) \mathbf{u}
+% - (\mathbf{u}\cdot\mathbf{B})\mathbf{B}
+% + \mathbf{B} \times \eta \mathbf{J}
+% \right] = 0 
+% \end{equation}
+% 
+% \begin{equation}
+% E =
+% \frac{1}{2}\rho |\mathbf{u}|^2 +
+% \frac{p}{\gamma-1}+
+% \frac{1}{2} |\mathbf{B}|^2
+% \end{equation}
+% 
+% \begin{equation}
+% p^* = p + \frac{1}{2}|\mathbf{B}|^2
+% \end{equation}
+% 
+% 
+
+As in any numerical code some numerical resistivity is present. In the linear
+analysis numerical resistivity has been assumed to be small in comparison with
+the physical resistivity.
+Our initial mean field is a Harris current sheet of the form
+$B_y=\mathrm{tanh}(x)$.
+We initialise the field in the magnetic vector potential $A_z=\mathrm{ln}
+|\mathrm{cosh(x})|$
+and take the curl to derive $\mathbf{B}.$
+To this we add a perturbation of the form cos(kx) in 2d and cos(kx)cos(ky) in
+3d.
+Free parameters are $\alpha$, $\beta=\frac{p}{B^2}$ and the resistivity $\eta$.
+Zero-gradient Neumann-like ``outflow'' boundary conditions often produce
+subsonic reflection for
+compressible flows \cite{Roache,Colonius}. We use
+a coarse mesh boundary which reduces this effect.
+
+
+\section{Simulation Results}
+\label{Results}
+\subsection{2D}
+\begin{figure}[H]
+\centerline{\psfig{file=gmurphyfig1.ps,width=8cm}}
+\caption{\label{fig:islforma0.01}
+Formation of magnetic islands: magnetic field lines and density colourmap are
+shown at times: 245, 365, 490.
+ }
+ \end{figure}
+ \begin{figure}[H]
+ %\epsscale{1.15} 
+\centerline{\psfig{file=gmurphyfig2.ps,width=8cm}}
+ \caption{\label{fig:islforma0.3}
+ Same as Figure \ref{fig:islforma0.01} but for $\alpha=0.3$
+  }
+  \end{figure}
+We performed 2d and 3d simulations of current sheets for different initial
+perturbations $k=0.01,0.04,0.3,0.6$. We tracked the growth rate of the
+cross-sheet magnetic field $B_x$.
+In the simulations an initial transient period, $t_{transient}\sim 100 \tau_A$
+roughly corresponding to half the crossing time of the domain ($t=112 \tau_A$)
+was observed
+before the linear mode was established.
+As the tearing mode grows linearly, field lines reconnect, new separatrices are
+formed and magnetic islands grow in size, eventually exceeding the size of the
+original current sheet.
+In Figures \ref{fig:islforma0.01} and \ref{fig:islforma0.3} the time evolution
+of
+magnetic islands for $\alpha=0.01,0.3$ are plotted against time in units of the Alfv\'en crossing time, $\tau_A$.
+
+
+  \begin{figure}[H] 
+\centerline{\psfig{file=gmurphyfig3.ps,width=8cm}}
+  \caption{\label{fig:2drecoa0.01}
+  Growth of log of maximum $B_x$ plotted against time. The linear growth rate is
+  plotted and the critical value for saturation.
+   }
+	\end{figure}
+%	\begin{figure}[H]
+	%\epsscale{1.15} 
+%	\plotone{alpha0.04.ps}
+%\centerline{\psfig{file=alpha0.04.ps,width=6cm}}
+%	\caption{\label{fig:2drecoa0.04}
+%	Growth of log of maximum $B_x$ plotted against time. The linear growth rate
+%	is
+%	plotted and the critical value for saturation.
+%	 }
+%	 \end{figure}
+	 \begin{figure}[H]
+	 %\epsscale{1.15}
+	 %\plotone{alpha0.3.ps}
+\centerline{\psfig{file=gmurphyfig4.ps,width=8cm}}
+	 \caption{\label{fig:2drecoa0.3}
+Same as Fig. \ref{fig:2drecoa0.01} but for $\alpha=0.3$.
+	  }
+	  \end{figure}
+
+
+
+\begin{figure}[H]
+%\epsscale{1.15}
+%\plotone{energyalpha0.01.eps}
+\centerline{\psfig{file=gmurphyfig5.ps,width=8cm}}
+\caption{\label{fig:2denergya0.01}
+Time evolution of change in kinetic energy, magnetic energy and internal energy.
+Most of the magnetic energy is converted into thermal energy.
+ }
+\end{figure}
+
+
+%\begin{figure}[H]
+%\epsscale{1.15}
+%\plotone{energyalpha0.04.eps}
+%\centerline{\psfig{file=energyalpha0.04.eps,width=6cm}}
+%\caption{\label{fig:2denergya0.04}
+%Same as Fig.  \ref{fig:2denergya0.01} but for $\alpha=0.04$.
+% }
+%\end{figure}
+
+
+%\begin{figure}[H]
+%\centerline{\psfig{file=energyalpha0.3.eps,width=6cm}}
+%\caption{\label{fig:2denergya0.3}
+%Same as Fig. \ref{fig:2denergya0.01} but for $\alpha=0.3$.
+% }
+%\end{figure}
+
+
+  \subsubsection{Agreement with linear analysis}
+  In Figures \ref{fig:2drecoa0.01} and
+  \ref{fig:2drecoa0.3} the growth rate in cross-sheet magnetic field, $B_x$ for
+  different exciting modes of the TMI is plotted against time. In all cases a
+  linear regime is found with slopes near the analytical predictions of Furth et
+  al. \cite{Furth}.
+ 
+\begin{figure}[H]
+%\epsscale{1.15}
+%\plotone{islalpha0.01.eps}
+\centerline{\psfig{file=gmurphyfig6.ps,width=8cm}}
+\caption{\label{fig:2disla0.01}
+Magnetic island width evolution plotted against time in units of $\tau_A$ for
+$\alpha=0.01$. The width is estimated using
+the full-width half maximum of the thermal pressure.
+It remains approximately constant in the linear phase and transfers to a linear
+growth in $t$ once in the Rutherford regime.
+ }
+\end{figure}
+
+%\begin{figure}[H]
+%\epsscale{1.15}
+%\plotone{islalpha0.04.eps}
+%\centerline{\psfig{file=islalpha0.04.eps,width=6cm}}
+%\caption{\label{fig:2disla0.04}
+%Same as \ref{fig:2disla0.01} but for $\alpha=0.04$.
+% }
+%\end{figure}
+
+\begin{figure}[H]
+\centerline{\psfig{file=gmurphyfig7.ps,width=8cm}}
+\caption{\label{fig:2disla0.3}
+Same as \ref{fig:2disla0.01} but for $\alpha=0.3$.
+ }
+\end{figure}
+
+                 
+					  
+
+\subsubsection{Agreement with nonlinear analysis}
+
+We find plotting the island width against time that it remains small in the
+linear regime and grows as $t^2$ in the Rutherford regime.
+We can estimate the time of transition from linear to Rutherford from both the
+$B_x$ plots and the island width plots, however the island width plots provide a
+more accurate estimate.
+The time at which the system becomes nonlinear is tabulated in Table
+\ref{aba:tbl1}.
+The magnetic island width can be derived from eqn 18. in \cite{Rutherford,White} and can be written in approximate form as
+\begin{equation}
+w_I \sim \frac{\tilde{t} - t_{d}}{S}, 
+\end{equation}
+where $t_{d}$ accounts for the total delay (transient and time spent in linear
+regime) in our simulations before entering the Rutherford regime.
+
+\begin{table}
+\caption{Growth Rates and Saturation Times for Lundquist number 2400}
+\begin{center}
+ \begin{tabular}{ |l |l| l| l| l| }
+ \hline
+% $\alpha$ & Linear Growth Rate [$\tau_A^{-1}$] & Saturation Time [$\tau_A$] \\ \hline
+ $\alpha$ &\multicolumn{2}{l|} {Linear Growth Rate [$\tau_A^{-1}$]
+ }&\multicolumn{2}{l|}{Saturation [$\tau_A$] }\\
+ \hline
+ & Theory & Sim & Theory & Sim \\
+ 0.01 & 0.0590 &  0.0528 & 153.233 & 170 \\
+ 0.04 & 0.0339 &  0.0484 & 394.980 & 250 \\
+ 0.3 & 0.0151 &  0.01276 & 508.370 & 520 \\
+% 0.6 & 0.0114 & & 596.173 & \\
+ \hline
+ \end{tabular}
+ \label{tab:2dtable}
+\end{center}
+\end{table}
+
+
+\section{3D Power spectra}
+\label{Turbulence}
+
+In Figure \ref{fig:psdmagnetic} we plot the power spectrum for $\beta=2$ 3d current sheet. The slope of $P(k)$ is $-4.8$, within the range of values found by \cite{Vestuto} for $\beta=1$ and $\beta=\infty$. \cite{Vestuto} note that in their driven, supersonic turbulence simulation they have a constant beta and a constant mass-to-flux ratio ``modulo the numerical reconnection effect''. We obtain the same power spectrum scaling without any added velocity perturbations.
+
+\begin{figure}[H]
+%\epsscale{0.95}
+%\plotone{psdmagnetic.ps}
+\centerline{\psfig{file=gmurphyfig8.ps,width=8cm}}
+\caption{\label{fig:psdmagnetic}
+3d kinetic power spectrum at time $t=295\tau_A$ with overplotted $k^{-4.8}$
+ }
+\end{figure}
+
+\section{Discussion and Conclusion}
+\label{Discussion}
+
+
+
+\subsection{Consequences for driven-turbulence simulations}
+
+Our results show that even without either a driven turbulence mechanism, or an
+initially turbulent velocity spectrum it is possible for the vortices generated
+by the TMI to mimic the power spectrum seen in simulations of turbulence. This
+can have serious consequences for MHD simulations where the resistivity is not
+explicitly constrained (i.e. numerical resistivity plays a role), since there 
+will be inevitably be some numerical-reconnection driven vortices present in the simulation. However using an explicit resistivity, the contribution from 
+reconnection can be estimated using the formulae in \cite{Furth,Rutherford}.
+
+%\subsection{Benchmark for MHD codes}
+Finally, we propose as a benchmark for resistive MHD codes the tearing mode instability test,
+which can be compared with both analytical results for both the linear and
+nonlinear regimes, as well as with laboratory experiments. The test may also
+prove useful as a way of quantifying the effects of numerical resistivity in an MHD code.
+ 
+\section*{Acknowledgements}
+G.C.M. would like to acknowledge funding from the Agence Nationale de Recherche, the University of Calgary, and the Dublin Institute for Advanced Studies.
+
+\bibliographystyle{ws-procs11x85}
+\begin{thebibliography}{}
+
+
+\bibitem{Phan}
+T.~D. {Phan}, J.~T. {Gosling}, M.~S. {Davis}, R.~M. {Skoug}, M.~{{\O}ieroset},
+  R.~P. {Lin}, R.~P. {Lepping}, D.~J. {McComas}, C.~W. {Smith}, H.~{Reme} and
+  A.~{Balogh}, {\em Nature} {\bf 439}, 175(January 2006).
+
+\bibitem{Hawley}
+J.~F. {Hawley} and S.~A. {Balbus}, {\em \apj} {\bf 376}, 223(July 1991).
+
+\bibitem{Shibata}
+K.~{Shibata}, {Evidence of Magnetic Reconnection in Solar Flares and a Unified
+  Model of Flares}, in {\em Structure Formation and Function of Gaseous,
+  Biological and Strongly Coupled Plasmas, p. 74\/}, September 1999.
+
+\bibitem{Furth}
+H.~P. {Furth}, J.~{Killeen} and M.~N. {Rosenbluth}, {\em Physics of Fluids}
+  {\bf 6}, 459 (1963).
+
+\bibitem{Rutherford}
+P.~H. {Rutherford}, {\em Physics of Fluids} {\bf 16}, 1903(November 1973).
+
+\bibitem{White}
+R.~B. {White}, {\em Reviews of Modern Physics} {\bf 58}, 183(January 1986).
+
+\bibitem{PriestForbes}
+E.~{Priest} and T.~{Forbes}, {\em {Magnetic Reconnection}} (Magnetic
+  Reconnection, by Eric Priest and Terry Forbes, pp.~612.~ISBN
+  0521481791.~Cambridge, UK: Cambridge University Press, June 2000., June
+  2000).
+
+\bibitem{Biskamp}
+D.~{Biskamp}, {\em {Magnetic Reconnection in Plasmas}} (Magnetic reconnection
+  in plasmas, Cambridge, UK: Cambridge University Press, 2000 xiv, 387
+  p.~Cambridge monographs on plasma physics, vol.~3, ISBN 0521582881, November
+  2000).
+
+\bibitem{Birn}
+J.~{Birn}, J.~F. {Drake}, M.~A. {Shay}, B.~N. {Rogers}, R.~E. {Denton},
+  M.~{Hesse}, M.~{Kuznetsova}, Z.~W. {Ma}, A.~{Bhattacharjee}, A.~{Otto} and
+  P.~L. {Pritchett}, {\em \jgr} {\bf 106}, 3715(March 2001).
+
+\bibitem{Roache}
+P.~J. {Roache}, {\em {Computational Fluid Dynamics}} (Computational Fluid
+  Dynamics, Albuquerque: Hermosa, 1976, 1976).
+
+\bibitem{Colonius}
+T. {Colonius}, {\em Ann. Rev. Fluid. Mech.} {\bf 36},
+  315(June 2004).
+
+\bibitem{Vestuto}
+J.~G. {Vestuto}, E.~C. {Ostriker} and J.~M. {Stone}, {\em \apj} {\bf 590},
+  858(June 2003).
+
+\end{thebibliography}
+
+\end{multicols}
+
+\end{document}
+
+\bibitem{Vestuto}
+J.~G. {Vestuto}, E.~C. {Ostriker} and J.~M. {Stone}, {\em \apj} {\bf 590},
+  858(June 2003).
+
+\end{thebibliography}
+
+\end{multicols}
+
+\end{document}
